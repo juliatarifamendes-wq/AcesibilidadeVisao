@@ -1,0 +1,26 @@
+/* Estilos Customizados e Animações */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Texto Gradiente em Arco-Íris */
+.gradient-text {
+  background: linear-gradient(135deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Borda em Arco-Íris */
+.rainbow-border {
+  border-image: linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6) 1;
+}
+
+/* Fundo Gradiente Suave */
+.rainbow-bg-subtle {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+}
+
+/* Barra do Espectro de Luz */
+.spectrum-bar {
+  background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+}
