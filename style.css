@@ -1,26 +1,71 @@
-/* Estilos Customizados e Animações */
-body {
-  font-family: 'Inter', sans-serif;
-}
+ body {
+   font-family: 'Inter', sans-serif;
+   transition: background-color 0.3s ease, color 0.3s ease;
+ }
 
-/* Texto Gradiente em Arco-Íris */
-.gradient-text {
-  background: linear-gradient(135deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+ /* Texto Gradiente em Arco-Íris */
+ .gradient-text {
+   background: linear-gradient(135deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+ }
 
-/* Borda em Arco-Íris */
-.rainbow-border {
-  border-image: linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6) 1;
-}
+ /* Barra do Espectro de Luz */
+ .spectrum-bar {
+   background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+ }
 
-/* Fundo Gradiente Suave */
-.rainbow-bg-subtle {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
-}
+ /* Estilos de Alto Contraste */
+ body.alto-contraste {
+   background-color: #000000 !important;
+   color: #ffff00 !important;
+ }
 
-/* Barra do Espectro de Luz */
-.spectrum-bar {
-  background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-}
+ body.alto-contraste header,
+ body.alto-contraste section,
+ body.alto-contraste article,
+ body.alto-contraste footer,
+ body.alto-contraste div,
+ body.alto-contraste nav {
+   background-color: #000000 !important;
+   border-color: #ffff00 !important;
+   color: #ffff00 !important;
+   box-shadow: none !important;
+ }
+
+ body.alto-contraste h1,
+ body.alto-contraste h2,
+ body.alto-contraste h3,
+ body.alto-contraste h4,
+ body.alto-contraste p,
+ body.alto-contraste span,
+ body.alto-contraste li,
+ body.alto-contraste strong,
+ body.alto-contraste label {
+   color: #ffff00 !important;
+ }
+
+ body.alto-contraste .gradient-text {
+   background: none !important;
+   -webkit-text-fill-color: #ffff00 !important;
+   color: #ffff00 !important;
+   text-decoration: underline;
+ }
+
+ body.alto-contraste button,
+ body.alto-contraste a {
+   background-color: #000000 !important;
+   color: #ffff00 !important;
+   border: 2px solid #ffff00 !important;
+ }
+
+ body.alto-contraste button:hover,
+ body.alto-contraste a:hover {
+   background-color: #ffff00 !important;
+   color: #000000 !important;
+ }
+
+ body.alto-contraste canvas {
+   border: 2px solid #ffff00 !important;
+   background-color: #050505 !important;
+ }

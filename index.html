@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Surgem os Arco-Íris? - Óptica Interativa</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Barra de Acessibilidade -->
+    <div class="bg-slate-950 border-b border-slate-800 text-xs py-1.5 px-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <span class="text-slate-400"><i class="fa-solid fa-universal-access text-indigo-400 mr-1"></i> Opções de
+                Acessibilidade</span>
+            <div class="flex items-center space-x-2">
+                <button id="btn-contraste" aria-pressed="false"
+                    class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-slate-200 transition border border-slate-700">
+                    <i class="fa-solid fa-circle-half-stroke mr-1"></i> Alto Contraste
+                </button>
+                <button id="btn-aumentar-texto" title="Aumentar texto"
+                    class="bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded text-slate-200 transition border border-slate-700 font-bold">
+                    A+
+                </button>
+                <button id="btn-diminuir-texto" title="Diminuir texto"
+                    class="bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded text-slate-200 transition border border-slate-700 font-bold">
+                    A-
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navegação -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg">
+                    <i class="fa-solid font-bold fa-rainbow"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-white">Óptica & Natureza</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+                <a href="#simulador" class="hover:text-indigo-400 transition-colors">Simulador</a>
+                <a href="#processos" class="hover:text-indigo-400 transition-colors">Processos Ópticos</a>
+                <a href="#geometria" class="hover:text-indigo-400 transition-colors">Geometria (42°)</a>
+                <a href="#variacoes" class="hover:text-indigo-400 transition-colors">Variações</a>
+                <a href="#quiz" class="hover:text-indigo-400 transition-colors">Quiz</a>
+            </nav>
+            <a href="#simulador"
+                class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-indigo-500/25">
+                Experimentar
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-12">
+
+        <!-- Seção Principal / Hero -->
+        <section class="text-center py-8 md:py-12 space-y-6">
+            <div
+                class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-semibold text-indigo-400">
+                <span><i class="fa-solid fa-flask text-xs mr-1"></i> Artigo Científico Interativo</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                Como surgem os <span class="gradient-text">arco-íris</span>?
+            </h1>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 font-light leading-relaxed">
+                Uma viagem pela física da luz: entenda como a refração, a reflexão e a dispersão transformam gotas de
+                chuva em um espetáculo de cores.
+            </p>
+        </section>
+
+        <!-- Visualizador Interativo de Física -->
+        <section id="simulador"
+            class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 md:p-6 shadow-2xl backdrop-blur">
+            <div
+                class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-700 mb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-atom text-indigo-400"></i> Simulador Óptico da Gota de Água
+                    </h2>
+                    <p class="text-sm text-slate-400">Observe o trajeto da luz solar ao interagir com uma gotícula
+                        atmosférica.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button id="btn-primario" onclick="setMode('primary')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white shadow transition-all hover:bg-indigo-500">
+                        Arco-Íris Primário (42°)
+                    </button>
+                    <button id="btn-duplo" onclick="setMode('secondary')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">
+                        Arco-Íris Duplo (2 Reflexões)
+                    </button>
+                    <button id="btn-neblina" onclick="setMode('fogbow')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">
+                        Gotas Minúsculas (Neblina)
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                <!-- Container do Canvas -->
+                <div
+                    class="lg:col-span-2 relative bg-slate-950 rounded-xl border border-slate-800 p-2 overflow-hidden flex flex-col items-center">
+                    <canvas id="opticsCanvas"
+                        class="w-full h-[360px] md:h-[420px] rounded-lg cursor-crosshair block"></canvas>
+                    <div
+                        class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded-md border border-slate-700/50 text-xs text-slate-300 space-y-1 pointer-events-none">
+                        <div class="flex items-center gap-2"><span
+                                class="w-2.5 h-2.5 rounded-full bg-amber-300 inline-block"></span> Luz Solar (Branca)
+                        </div>
+                        <div class="flex items-center gap-2"><span
+                                class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span> Vermelho (~42°)</div>
+                        <div class="flex items-center gap-2"><span
+                                class="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block"></span> Violeta (~40°)</div>
+                    </div>
+                    <div id="canvasStatus"
+                        class="w-full text-center py-2 text-xs text-slate-400 font-mono border-t border-slate-800 mt-2">
+                        Ângulo de Saída Médio: <span id="angleDisplay" class="text-indigo-400 font-bold">42.0°</span> |
+                        Reflexões Internas: <span id="reflectionsDisplay" class="text-amber-400 font-bold">1</span>
+                    </div>
+                </div>
+
+                <!-- Controles e Explicação -->
+                <div class="space-y-5 text-sm text-slate-300">
+                    <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 space-y-3">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-indigo-400"></i> Parâmetros do Raio
+                        </h3>
+
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Ponto de Impacto na Gota (Incidência):</span>
+                                <span id="impactVal" class="text-indigo-400 font-mono">60%</span>
+                            </div>
+                            <input type="range" id="impactSlider" min="10" max="90" value="60"
+                                class="w-full accent-indigo-500 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Tamanho da Gota de Água:</span>
+                                <span id="sizeVal" class="text-indigo-400 font-mono">1.5 mm (Normal)</span>
+                            </div>
+                            <input type="range" id="sizeSlider" min="0.1" max="3" step="0.1" value="1.5"
+                                class="w-full accent-indigo-500 cursor-pointer">
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-xs text-slate-400">Animar Decomposição:</span>
+                            <button id="toggleAnimBtn" onclick="toggleAnimation()"
+                                class="px-3 py-1 bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded text-xs hover:bg-indigo-600/50 transition">
+                                <i class="fa-solid fa-pause mr-1"></i> Pausar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 space-y-2">
+                        <h4 class="font-semibold text-amber-300 text-xs uppercase tracking-wider">O que está
+                            acontecendo?</h4>
+                        <p id="modeDesc" class="text-xs text-slate-300 leading-relaxed">
+                            A luz branca incide na gota e sofre <strong>refração</strong> na entrada (muda de meio e se
+                            desacelera). As diferentes frequências sofrem <strong>dispersão</strong>. A luz atinge o
+                            fundo da gota, sofre <strong>reflexão interna total/parcial</strong> e refrata novamente ao
+                            sair num ângulo fixo próximo a 42°.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artigo Principal -->
+        <article class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Corpo do Texto -->
+            <div class="lg:col-span-2 space-y-10 text-slate-300 leading-relaxed">
+
+                <!-- Introdução -->
+                <section class="space-y-4">
+                    <div
+                        class="inline-block px-3 py-1 rounded-md bg-indigo-950 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                        1. Fundamentos da Visão
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">A Importância da Luz no Nosso Cotidiano</h2>
+                    <p>
+                        O arco-íris é um dos fenômenos naturais mais bonitos e fascinantes observados pelo ser humano.
+                        Ele aparece no céu geralmente após a chuva, forming um conjunto de cores em forma de arco.
+                        Apesar de parecer algo mágico, sua formação está diretamente ligada às propriedades da luz e ao
+                        funcionamento da visão humana, sendo um importante objeto de estudo da óptica.
+                    </p>
+                    <p>
+                        A luz é essencial para que possamos enxergar o mundo ao nosso redor. Sem ela, nossos olhos não
+                        conseguem captar imagens. Nesse sentido, compreender como surgem os arco-íris permite entender
+                        melhor como a luz se comporta ao interagir com diferentes meios, como o ar e a água, além de
+                        despertar a curiosidade científica sobre fenômenos do cotidiano.
+                    </p>
+                </section>
+
+                <!-- Processos Ópticos -->
+                <section id="processos" class="space-y-6">
+                    <div
+                        class="inline-block px-3 py-1 rounded-md bg-indigo-950 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                        2. Mecânica Física
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Três Processos Fundamentais da Óptica</h2>
+                    <p>
+                        O arco-íris é formado a partir da interação da luz solar com as gotas de água presentes na
+                        atmosfera. Esse fenômeno ocorre devido a três processos principais da óptica:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                        <div
+                            class="bg-slate-800/60 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold mb-3">
+                                1</div>
+                            <h3 class="font-bold text-white mb-1">Refração</h3>
+                            <p class="text-xs text-slate-400">Acontece quando a luz do Sol entra na gota e muda de
+                                direção ao passar do ar para a água, alterando sua velocidade.</p>
+                        </div>
+                        <div
+                            class="bg-slate-800/60 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold mb-3">
+                                2</div>
+                            <h3 class="font-bold text-white mb-1">Reflexão Interna</h3>
+                            <p class="text-xs text-slate-400">Ocorre quando a luz bate na parede posterior interna da
+                                gota de água e é rebatida de volta para a frente.</p>
+                        </div>
+                        <div
+                            class="bg-slate-800/60 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold mb-3">
+                                3</div>
+                            <h3 class="font-bold text-white mb-1">Dispersão</h3>
+                            <p class="text-xs text-slate-400">A separação da luz branca nas suas cores componentes, pois
+                                cada cor desacelera em ritmo diferente na água.</p>
+                        </div>
+                    </div>
+
+                    <p>
+                        Ao sair da gota, a luz sofre novamente refração ao passar da água de volta para o ar,
+                        intensificando a separação espacial de suas cores.
+                    </p>
+                </section>
+
+                <!-- Espectro Visível -->
+                <section class="space-y-4">
+                    <div
+                        class="inline-block px-3 py-1 rounded-md bg-indigo-950 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                        3. Espectro Eletromagnético
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">A Luz Branca e as Sete Cores</h2>
+                    <p>
+                        A luz branca do Sol é composta por várias cores, que formam o chamado <strong>espectro
+                            visível</strong>: vermelho, laranja, amarelo, verde, azul, anil e violeta.
+                    </p>
+
+                    <!-- Barra do Espectro -->
+                    <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
+                        <div class="spectrum-bar h-6 rounded-lg w-full"></div>
+                        <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                            <span>700 nm (Vermelho - Menor desvio)</span>
+                            <span>400 nm (Violeta - Maior desvio)</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Cada uma dessas cores possui um comprimento de onda e frequência diferentes. O índice de
+                        refração da água varia levemente para cada comprimento de onda, fazendo com que o violeta desvie
+                        mais intensamente que o vermelho. Esse desvio diferenciado é a essência da <em>dispersão
+                            luminosa</em>.
+                    </p>
+                </section>
+
+                <!-- Geometria dos 42 Graus -->
+                <section id="geometria" class="space-y-4">
+                    <div
+                        class="inline-block px-3 py-1 rounded-md bg-indigo-950 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                        4. Posição & Geometria
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Por que um Formato em Arco e Ângulo de 42°?</h2>
+                    <p>
+                        O formato em arco ocorre porque cada cor emerge da gota em um ângulo específico em relação ao
+                        observador. O arco-íris principal forma-se em um ângulo aproximado de <strong>42 graus</strong>
+                        (entre a direção do raio solar incidente e o raio que chega aos seus olhos).
+                    </p>
+                    <div class="bg-indigo-950/40 border-l-4 border-indigo-500 p-4 rounded-r-xl my-4 text-sm">
+                        <p class="font-semibold text-indigo-300 mb-1">Condições Essenciais para Visualização:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
+                            <li>O Sol deve estar localizado às <strong>costas do observador</strong>.</li>
+                            <li>Deve haver uma cortina de <strong>gotas de água</strong> na frente do observador.</li>
+                            <li>O Sol precisa estar relativamente baixo no horizonte (abaixo de 42° de elevação).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Variações de Arco-Íris -->
+                <section id="variacoes" class="space-y-4">
+                    <div
+                        class="inline-block px-3 py-1 rounded-md bg-indigo-950 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                        5. Fenômenos Especiais
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Arco-Íris Duplo, Circulares e Neblina</h2>
+
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/40 border border-slate-700/60 p-4 rounded-xl">
+                            <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-sm"></i> Arco-Íris Duplo (Secundário)
+                            </h3>
+                            <p class="text-sm mt-2 text-slate-300">
+                                Ocorre quando a luz sofre <strong>duas reflexões internas</strong> dentro da gota de
+                                água antes de sair. Por conta disso:
+                            </p>
+                            <ul class="list-disc list-inside text-xs text-slate-400 mt-2 space-y-1">
+                                <li>Aparece em um ângulo maior (~50° a 53°).</li>
+                                <li>As cores aparecem <strong>invertidas</strong> (Vermelho por dentro, Violeta por
+                                    fora).</li>
+                                <li>Sua intensidade luminosa é menor, pois parte da luz se perde a cada reflexão.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Barra Lateral / Resumo -->
+            <div class="space-y-6">
+                <div
+                    class="bg-gradient-to-b from-indigo-950/60 to-slate-900 border border-indigo-500/30 p-5 rounded-2xl space-y-4">
+                    <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bookmark text-indigo-400"></i> Resumo Rápido
